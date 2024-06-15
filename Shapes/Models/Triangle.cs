@@ -17,6 +17,15 @@ namespace Shapes.Models
         public ShapeDimension Side2 { get; }
         public ShapeDimension Side3 { get; }
 
+        public double Area
+        {
+            get
+            {
+                double s = (Side1 + Side2 + Side3) / 2;
+                return Math.Sqrt(s*(s-Side1)*(s-Side2)*(s-Side3));
+            }
+        }
+
         public Triangle(ShapeType shapeType, string name, double side1, double side2, double side3)
         {
             Type = shapeType;

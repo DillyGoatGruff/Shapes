@@ -16,6 +16,8 @@ namespace Shapes.Models
 
         public ShapeDimension[] Dimensions { get; }
 
+        public double Area => Math.PI * Math.Pow(Radius, 2);
+
         public Circle(ShapeType type, string name, double radius)
         {
             Type = type;

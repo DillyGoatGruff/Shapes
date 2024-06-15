@@ -16,6 +16,8 @@ namespace Shapes.Models
         public ShapeDimension Length { get; set; }
         public ShapeDimension Width { get; set; }
 
+        public double Area => Length * Width;
+
         public Rectangle(ShapeType type, string name, double length, double width)
         {
             Type = type;

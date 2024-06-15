@@ -16,6 +16,8 @@ namespace Shapes.Models
 
         public ShapeDimension Side { get; set; }
 
+        public double Area => Math.Pow(Side, 2);
+
         public Square(ShapeType type, string name, double side)
         {
             Type = type;

@@ -9,11 +9,13 @@ namespace Shapes
     public interface IShape
     {
        
-        public ShapeType Type { get; set; }
+        ShapeType Type { get; set; }
 
-        public string Name { get; set; }
+        string Name { get; set; }
 
-        public ShapeDimension[] Dimensions { get; }
+        double Area { get; }
+
+        ShapeDimension[] Dimensions { get; }
 
     }
 }
