@@ -1,13 +1,12 @@
-﻿<Window x:Class="Shapes.Wpf.MainWindow"
+﻿<Window x:Class="Shapes.Wpf.Windows.Main.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Shapes.Wpf"
+        xmlns:local="clr-namespace:Shapes.Wpf.Windows.Main"
         xmlns:appViews="clr-namespace:Shapes.Wpf.Views"
-        xmlns:appViewModels="clr-namespace:Shapes.Wpf.ViewModels"
         xmlns:shp="clr-namespace:Shapes.Models;assembly=Shapes"
-        mc:Ignorable="d" d:DataContext="{d:DesignInstance appViewModels:MainViewModel, IsDesignTimeCreatable=False}"
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance local:MainViewModel, IsDesignTimeCreatable=False}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +15,8 @@
         </Grid.RowDefinitions>
 
         <DockPanel Background="LightGray" >
-            <Button Margin="2" BorderThickness="1" BorderBrush="White">
+            <Button Margin="2" BorderThickness="1" BorderBrush="White"
+                    Command="{Binding CalculateAreaCommand}">
                 <StackPanel VerticalAlignment="Bottom">
                     <Image Source="/Resources/MeasureImage.png"  Height="50"/>
                     <TextBlock Text="Calculate Area" TextAlignment="Center"/>
@@ -33,7 +33,7 @@
             <Border DockPanel.Dock="Right"/>
         </DockPanel>
 
-        <ListView Grid.Row="1" HorizontalAlignment="left" VerticalAlignment="Top"
+        <ListView Grid.Row="1" HorizontalAlignment="left" VerticalAlignment="Top" Width="450"
                 ItemsSource="{Binding Shapes}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -42,13 +42,12 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid/>
+                    <WrapPanel/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Padding="5" BorderThickness="1" BorderBrush="Black" >
-
                         <appViews:ShapeView />
                     </Border>
                 </DataTemplate>

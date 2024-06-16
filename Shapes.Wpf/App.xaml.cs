@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Shapes.DataAccess;
-using Shapes.Wpf.ViewModels;
+using Shapes.Wpf.Services;
+using Shapes.Wpf.Windows.CalculatedAreas;
+using Shapes.Wpf.Windows.Main;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -19,8 +21,10 @@ namespace Shapes.Wpf
         public App()
         {
             ServiceProvider = new ServiceCollection()
+                .AddTransient<ICalculatedAreaPresenter, CalculatedAreaPresenter>()
                 .AddSingleton<IShapesDataSource, ShapesManager>()
                 .AddSingleton<MainViewModel>()
+                .AddSingleton<CalculatedAreasViewModel>()
                 .AddSingleton<MainWindow>(x =>
                 {
                     return new MainWindow()

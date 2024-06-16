@@ -28,7 +28,7 @@ namespace Shapes.DataAccess
                         {
                             ShapeTypeId = c.Type.Id,
                             Name = c.Name,
-                            Radius = (decimal)c.Radius.Value,
+                            Radius = c.Radius,
                         };
                         break;
                     case Square s:
@@ -36,7 +36,7 @@ namespace Shapes.DataAccess
                         {
                             ShapeTypeId = s.Type.Id,
                             Name = s.Name,
-                            Length = (decimal)s.Side.Value
+                            Length = s.Side
                         };
                         break;
                     case Rectangle r:
@@ -44,8 +44,8 @@ namespace Shapes.DataAccess
                         {
                             ShapeTypeId = r.Type.Id,
                             Name = r.Name,
-                            Length = (decimal)r.Length.Value,
-                            Width = (decimal)r.Width.Value,
+                            Length = r.Length,
+                            Width = r.Width,
                         };
                         break;
                     case Triangle t:
@@ -53,9 +53,9 @@ namespace Shapes.DataAccess
                         {
                             ShapeTypeId = t.Type.Id,
                             Name = t.Name,
-                            Length = (decimal)t.Side1.Value,
-                            Width = (decimal)t.Side2.Value,
-                            Height = (decimal)t.Side3.Value,
+                            Length = t.Side1,
+                            Width = t.Side2,
+                            Height = t.Side3,
                         };
                         break;
                     default:

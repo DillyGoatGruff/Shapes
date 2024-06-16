@@ -25,14 +25,14 @@ namespace Shapes.Wpf.Tools
                     return Geometry.Parse($"M{StrokeThickness / 2},{StrokeThickness / 2} H{100 - StrokeThickness / 2} V{100 - StrokeThickness / 2} H{StrokeThickness / 2} Z");
                 case Models.Rectangle r:
                     scalingFactor = 100 / Math.Max(r.Length.Value, r.Width.Value);
-                    double scaledLength = r.Length.Value * scalingFactor - StrokeThickness / 2;
-                    double scaledWidth = r.Width.Value * scalingFactor - StrokeThickness - 2;
+                    double scaledLength = r.Length * scalingFactor - StrokeThickness / 2;
+                    double scaledWidth = r.Width * scalingFactor - StrokeThickness - 2;
                     return Geometry.Parse($"M{StrokeThickness / 2},{StrokeThickness / 2} H{scaledWidth} V{scaledLength} H{StrokeThickness / 2} Z");
                 case Triangle t:
-                    scalingFactor = 100 / Math.Max(Math.Max(t.Side1.Value, t.Side2.Value), t.Side3.Value);
-                    double s1 = t.Side1.Value * scalingFactor;
-                    double s2 = t.Side2.Value * scalingFactor;
-                    double s3 = t.Side3.Value * scalingFactor;
+                    scalingFactor = 100 / Math.Max(Math.Max((double)t.Side1, t.Side2), t.Side3);
+                    double s1 = t.Side1 * scalingFactor;
+                    double s2 = t.Side2 * scalingFactor;
+                    double s3 = t.Side3 * scalingFactor;
                     //point 2 location
                     double x = (Math.Pow(s1, 2) + Math.Pow(s3, 2) - Math.Pow(s2, 2)) / (2 * s1);
                     double y = Math.Sqrt(Math.Pow(s3, 2) - Math.Pow(x, 2));
