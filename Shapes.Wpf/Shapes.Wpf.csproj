@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <Folder Include="Windows\AddShape\" />
   </ItemGroup>
 
 </Project>

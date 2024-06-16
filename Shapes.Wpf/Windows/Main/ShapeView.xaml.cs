@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Shapes.Wpf.Views
+namespace Shapes.Wpf.Windows.Main
 {
     /// <summary>
     /// Interaction logic for ShapeView.xaml

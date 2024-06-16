@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shapes.Wpf.Windows.Main"
-        xmlns:appViews="clr-namespace:Shapes.Wpf.Views"
         xmlns:shp="clr-namespace:Shapes.Models;assembly=Shapes"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance local:MainViewModel, IsDesignTimeCreatable=False}"
         Title="MainWindow" Height="450" Width="800">
@@ -48,7 +47,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Padding="5" BorderThickness="1" BorderBrush="Black" >
-                        <appViews:ShapeView />
+                        <local:ShapeView />
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
