@@ -22,7 +22,8 @@
                     <!--<TextBlock Text="Area" TextAlignment="Center"/>-->
                 </StackPanel>
             </Button>
-            <Button Margin="2" BorderThickness="1" BorderBrush="White">
+            <Button Margin="2" BorderThickness="1" BorderBrush="White"
+                    Command="{Binding AddShapeCommand}">
                 <StackPanel VerticalAlignment="Bottom">
                     <Image Source="/Resources/AddShape.png"  Height="50"/>
                     <TextBlock Text="Add Shape" TextAlignment="Center"/>

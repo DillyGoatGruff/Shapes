@@ -2,6 +2,7 @@
 using Shapes.DataAccess;
 using Shapes.Mvvm.Services;
 using Shapes.Mvvm.ViewModels;
+using Shapes.Wpf.Windows.AddShape;
 using Shapes.Wpf.Windows.CalculatedAreas;
 using Shapes.Wpf.Windows.Main;
 using System.Windows;
@@ -20,10 +21,12 @@ namespace Shapes.Wpf
         public App()
         {
             ServiceProvider = new ServiceCollection()
+                .AddTransient<IAddShapePresenter, AddShapePresenter>()
                 .AddTransient<ICalculatedAreaPresenter, CalculatedAreaPresenter>()
                 .AddSingleton<IShapesDataSource, ShapesManager>()
                 .AddSingleton<MainViewModel>()
-                .AddSingleton<CalculatedAreasViewModel>()
+                .AddTransient<AddShapeViewModel>()
+                .AddTransient<CalculatedAreasViewModel>()
                 .AddSingleton<MainWindow>(x =>
                 {
                     return new MainWindow()

@@ -7,33 +7,22 @@ namespace Shapes.Wpf.Tools
 {
     internal class ShapeToPathDataConverter : IValueConverter
     {
-        public double StrokeThickness { get; set; } = 3;
+        private readonly DimensionsToPathMultiConverter _dimensionsToPathMultiConverter = new DimensionsToPathMultiConverter();
+        
+        public double StrokeThickness 
+        { 
+            get => _dimensionsToPathMultiConverter.StrokeThickness; 
+            set => _dimensionsToPathMultiConverter.StrokeThickness = value; 
+        }
+        
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            double scalingFactor;
-            switch (value)
+            if (value is not IShape shape)
             {
-                case Circle:
-                    return Geometry.Parse($"M {0 + StrokeThickness / 2},{50 + StrokeThickness / 2} A{50 - StrokeThickness / 2},{50 - StrokeThickness / 2} 0 1 1 {100 - StrokeThickness / 2},{50 - StrokeThickness / 2} A {50 - StrokeThickness / 2},{50 - StrokeThickness / 2} 0 1 1 {0 + StrokeThickness / 2},{50 + StrokeThickness / 2}");
-                case Square s:
-                    return Geometry.Parse($"M{StrokeThickness / 2},{StrokeThickness / 2} H{100 - StrokeThickness / 2} V{100 - StrokeThickness / 2} H{StrokeThickness / 2} Z");
-                case Rectangle r:
-                    scalingFactor = 100 / Math.Max(r.Length.Value, r.Width.Value);
-                    double scaledLength = r.Length * scalingFactor - StrokeThickness / 2;
-                    double scaledWidth = r.Width * scalingFactor - StrokeThickness - 2;
-                    return Geometry.Parse($"M{StrokeThickness / 2},{StrokeThickness / 2} H{scaledWidth} V{scaledLength} H{StrokeThickness / 2} Z");
-                case Triangle t:
-                    scalingFactor = 100 / Math.Max(Math.Max((double)t.Side1, t.Side2), t.Side3);
-                    double s1 = t.Side1 * scalingFactor;
-                    double s2 = t.Side2 * scalingFactor;
-                    double s3 = t.Side3 * scalingFactor;
-                    //point 2 location
-                    double x = (Math.Pow(s1, 2) + Math.Pow(s3, 2) - Math.Pow(s2, 2)) / (2 * s1);
-                    double y = Math.Sqrt(Math.Pow(s3, 2) - Math.Pow(x, 2));
-                    return Geometry.Parse($"M{StrokeThickness / 2},{StrokeThickness / 2} H{s1 - StrokeThickness / 2} L{x - StrokeThickness / 2},{y - StrokeThickness / 2} z");
+                return value;
             }
 
-            return value;
+            return _dimensionsToPathMultiConverter.Convert([shape.Type, shape.Dimensions], targetType, parameter, culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

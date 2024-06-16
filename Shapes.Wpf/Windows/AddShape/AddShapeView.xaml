@@ -3,41 +3,105 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:Shapes.Wpf.Windows.Main"
              xmlns:appTools="clr-namespace:Shapes.Wpf.Tools"
-             xmlns:shapes="clr-namespace:Shapes.Mvvm.Models.Shapes;assembly=Shapes.Mvvm"
+             xmlns:shapesVMs="clr-namespace:Shapes.Mvvm.ViewModels;assembly=Shapes.Mvvm"
              xmlns:shapesModels="clr-namespace:Shapes.Mvvm.Models;assembly=Shapes.Mvvm"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance shapes:IShape, IsDesignTimeCreatable=False}"
+             xmlns:wkta="clr-namespace:WpfToolKit.AttachedProperties;assembly=WpfToolKit"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance shapesVMs:AddShapeViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <appTools:ShapeToPathDataConverter x:Key="shapeToPathDataConverter"/>
+        <appTools:DimensionsToPathMultiConverter x:Key="dimensionsToPathMultiConverter"/>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
-        <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding Type.Name}" TextAlignment="Center"/>
-            <Viewbox Height="50" Width="50" HorizontalAlignment="Left">
-                <Path Stroke="Black" HorizontalAlignment="Center"
-                        StrokeThickness="{Binding StrokeThickness, Source={StaticResource shapeToPathDataConverter}}" 
-                        Data="{Binding Path=., Converter={StaticResource shapeToPathDataConverter}}" />
-            </Viewbox>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <ComboBox MinWidth="150" DisplayMemberPath="Name"
+                    ItemsSource="{Binding ShapeTypes}" SelectedValue="{Binding SelectedShapeType}"/>
+            <Grid Margin="5" Height="50" Width="50" HorizontalAlignment="Left">
+
+                <Viewbox>
+                    <Path Stroke="Black" HorizontalAlignment="Center"
+                        StrokeThickness="{Binding StrokeThickness, Source={StaticResource dimensionsToPathMultiConverter}}" >
+                        <Path.Data>
+                            <MultiBinding Converter="{StaticResource dimensionsToPathMultiConverter}">
+                                <Binding Path="SelectedShapeType"/>
+                                <Binding Path="Dimensions"/>
+                            </MultiBinding>
+                        </Path.Data>
+                    </Path>
+                </Viewbox>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding NewShape.Area}" Value="{x:Static sys:Double.NaN}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding NewShape.Area}" Value="0">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="Invalid" TextAlignment="Center" FontSize="10"/>
+                        <TextBlock Text="Dimensions" FontSize="10"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </StackPanel>
 
-        <StackPanel Grid.IsSharedSizeScope="True" Margin="15,0" Orientation="Vertical" VerticalAlignment="Bottom">
-            <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+        <StackPanel Grid.Column="1" Grid.IsSharedSizeScope="True" Margin="15,0" Orientation="Vertical" VerticalAlignment="Top">
+            <Grid Margin="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="clmnDimensionName" Width="auto"/>
+                    <ColumnDefinition SharedSizeGroup="clmnDimensionValue" Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Name:" TextAlignment="Right"/>
+                <TextBox Grid.Column="1" Margin="5,0,0,0" Text="{Binding ShapeName, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
             <ItemsControl Margin="0,0,0,0" ItemsSource="{Binding Dimensions}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type shapesModels:ShapeDimension}">
+                    <DataTemplate DataType="{x:Type shapesVMs:DimensionViewModel}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition SharedSizeGroup="clmnDimensionName" Width="auto"/>
                                 <ColumnDefinition SharedSizeGroup="clmnDimensionValue" Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Dimension, StringFormat='{}  {0}: '}"/>
-                            <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding Value}"/>
+                            <TextBlock Grid.Column="0" Margin="0,1" Text="{Binding Name, StringFormat='{}  {0}:'}" TextAlignment="Right"/>
+                            <TextBox Grid.Column="1" Margin="5,1,0,1" MinWidth="100" TextAlignment="Center"
+                                    Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+
+            <Grid Margin="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition SharedSizeGroup="clmnDimensionName" Width="auto"/>
+                    <ColumnDefinition SharedSizeGroup="clmnDimensionValue" Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Grid.Row="2" Text="Area:" TextAlignment="Right"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="10,0,0,0" TextAlignment="Left"
+                        Text="{Binding NewShape.Area, StringFormat=N1}" />
+                </StackPanel>
+            </Grid>
         </StackPanel>
-    </StackPanel>
+
+        <Button Grid.Row="1" Grid.ColumnSpan="2" Padding="5" Content="Save"
+                IsEnabled="{Binding CanSave}"
+                wkta:ButtonHelper.DialogValueResult="True"/>
+    </Grid>
 </UserControl>

@@ -30,6 +30,7 @@
     <ProjectReference Include="..\MvvmToolKit\MvvmToolKit.csproj" />
     <ProjectReference Include="..\Shapes.DataAccess\Shapes.DataAccess.csproj" />
     <ProjectReference Include="..\Shapes.MVVM\Shapes.Mvvm.csproj" />
+    <ProjectReference Include="..\WpfToolKit\WpfToolKit.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -96,5 +96,12 @@ namespace Shapes.DataAccess
 
             return shapes;
         }
+
+        public ShapeType[] GetShapeTypes()
+        {
+            using var context = new ShapesContext(m_connectionString);
+
+            return context.ShapeTypes.Select(x => new ShapeType(x.Id, x.Name)).ToArray();
+        }
     }
 }

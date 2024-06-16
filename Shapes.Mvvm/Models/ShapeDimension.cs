@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Shapes.Mvvm.Models
 {
-    public struct ShapeDimension
+    public class ShapeDimension
     {
         public string Dimension { get; set; }
         public double Value { get; set; }

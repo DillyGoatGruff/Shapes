@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmToolKit", "MvvmToolKit\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shapes.Mvvm", "Shapes.MVVM\Shapes.Mvvm.csproj", "{16DE0FBB-0906-4630-B3B8-3FC1BDE3DD11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfToolKit", "WpfToolKit\WpfToolKit.csproj", "{6E371CB5-D340-4A74-9A3B-33D44AF8ED95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{16DE0FBB-0906-4630-B3B8-3FC1BDE3DD11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16DE0FBB-0906-4630-B3B8-3FC1BDE3DD11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16DE0FBB-0906-4630-B3B8-3FC1BDE3DD11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E371CB5-D340-4A74-9A3B-33D44AF8ED95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E371CB5-D340-4A74-9A3B-33D44AF8ED95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E371CB5-D340-4A74-9A3B-33D44AF8ED95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E371CB5-D340-4A74-9A3B-33D44AF8ED95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -17,5 +17,14 @@ namespace Shapes.Mvvm.Models.Shapes
 
         ShapeDimension[] Dimensions { get; }
 
+        public static IShape CreateShape(ShapeType type) => type.Name switch
+        {
+            nameof(Circle) => new Circle(type, nameof(Circle), 0),
+            nameof(Square) => new Square(type, nameof(Square), 0),
+            nameof(Rectangle) => new Rectangle(type, nameof(Rectangle), 0, 0),
+            nameof(Triangle) => new Triangle(type, nameof(Triangle), 0, 0, 0),
+            _ => throw new NotImplementedException($"Unknown shape type: '{type.Name}'")
+        };
+
     }
 }
