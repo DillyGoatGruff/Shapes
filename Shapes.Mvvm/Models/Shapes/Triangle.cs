@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shapes.Models
+namespace Shapes.Mvvm.Models.Shapes
 {
     public class Triangle : IShape
     {
@@ -22,7 +22,7 @@ namespace Shapes.Models
             get
             {
                 double s = (Side1 + Side2 + Side3) / 2;
-                return Math.Sqrt(s*(s-Side1)*(s-Side2)*(s-Side3));
+                return Math.Sqrt(s * (s - Side1) * (s - Side2) * (s - Side3));
             }
         }
 

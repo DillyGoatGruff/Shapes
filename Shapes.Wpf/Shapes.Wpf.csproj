@@ -29,7 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MvvmToolKit\MvvmToolKit.csproj" />
     <ProjectReference Include="..\Shapes.DataAccess\Shapes.DataAccess.csproj" />
-    <ProjectReference Include="..\Shapes\Shapes.csproj" />
+    <ProjectReference Include="..\Shapes.MVVM\Shapes.Mvvm.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +38,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Windows\AddShape\AddShapeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -45,10 +48,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Windows\AddShape\" />
   </ItemGroup>
 
 </Project>

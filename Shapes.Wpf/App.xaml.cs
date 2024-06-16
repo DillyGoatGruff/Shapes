@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Shapes.DataAccess;
-using Shapes.Wpf.Services;
+using Shapes.Mvvm.Services;
+using Shapes.Mvvm.ViewModels;
 using Shapes.Wpf.Windows.CalculatedAreas;
 using Shapes.Wpf.Windows.Main;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 
 namespace Shapes.Wpf

@@ -1,13 +1,7 @@
-﻿using Shapes.Models;
-using System;
-using System.Collections.Generic;
+﻿using Shapes.Mvvm.Models.Shapes;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace Shapes.Wpf.Tools
 {
@@ -23,7 +17,7 @@ namespace Shapes.Wpf.Tools
                     return Geometry.Parse($"M {0 + StrokeThickness / 2},{50 + StrokeThickness / 2} A{50 - StrokeThickness / 2},{50 - StrokeThickness / 2} 0 1 1 {100 - StrokeThickness / 2},{50 - StrokeThickness / 2} A {50 - StrokeThickness / 2},{50 - StrokeThickness / 2} 0 1 1 {0 + StrokeThickness / 2},{50 + StrokeThickness / 2}");
                 case Square s:
                     return Geometry.Parse($"M{StrokeThickness / 2},{StrokeThickness / 2} H{100 - StrokeThickness / 2} V{100 - StrokeThickness / 2} H{StrokeThickness / 2} Z");
-                case Models.Rectangle r:
+                case Rectangle r:
                     scalingFactor = 100 / Math.Max(r.Length.Value, r.Width.Value);
                     double scaledLength = r.Length * scalingFactor - StrokeThickness / 2;
                     double scaledWidth = r.Width * scalingFactor - StrokeThickness - 2;

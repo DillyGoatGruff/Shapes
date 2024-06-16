@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shapes.Models
+namespace Shapes.Mvvm.Models.Shapes
 {
     public class Rectangle : IShape
     {

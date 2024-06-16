@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shapes.DataAccess", "Shapes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmToolKit", "MvvmToolKit\MvvmToolKit.csproj", "{4E8959CB-AB6B-4932-8632-4B8764C2C0E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shapes", "Shapes\Shapes.csproj", "{16DE0FBB-0906-4630-B3B8-3FC1BDE3DD11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shapes.Mvvm", "Shapes.MVVM\Shapes.Mvvm.csproj", "{16DE0FBB-0906-4630-B3B8-3FC1BDE3DD11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

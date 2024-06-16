@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Shapes.Wpf.Windows.CalculatedAreas;
+using Shapes.Mvvm.Services;
+using Shapes.Mvvm.ViewModels;
 using System.Windows;
 
-namespace Shapes.Wpf.Services
+namespace Shapes.Wpf.Windows.CalculatedAreas
 {
     internal class CalculatedAreaPresenter : ICalculatedAreaPresenter
     {

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shapes.Wpf.Services
+namespace Shapes.Mvvm.Services
 {
-    internal interface ICalculatedAreaPresenter
+    public interface ICalculatedAreaPresenter
     {
         /// <summary>
         /// Displays the calculated areas of the shapes.

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shapes.Models;
+using Shapes.Mvvm.Models;
+using Shapes.Mvvm.Models.Shapes;
+using Shapes.Mvvm.Services;
 
 namespace Shapes.DataAccess
 {

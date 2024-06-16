@@ -1,11 +1,12 @@
 ﻿using MvvmToolKit;
-using Shapes.Wpf.Services;
+using Shapes.Mvvm.Models.Shapes;
+using Shapes.Mvvm.Services;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Shapes.Wpf.Windows.Main
+namespace Shapes.Mvvm.ViewModels
 {
-    internal class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
     {
         private readonly IShapesDataSource _shapesDataSource;
         private readonly ICalculatedAreaPresenter _calculateAreaPresenter;

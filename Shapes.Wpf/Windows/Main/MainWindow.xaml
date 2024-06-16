@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shapes.Wpf.Windows.Main"
-        xmlns:shp="clr-namespace:Shapes.Models;assembly=Shapes"
-        mc:Ignorable="d" d:DataContext="{d:DesignInstance local:MainViewModel, IsDesignTimeCreatable=False}"
+        xmlns:shapesVM="clr-namespace:Shapes.Mvvm.ViewModels;assembly=Shapes.MVVM"
+        mc:Ignorable="d" d:DataContext="{d:DesignInstance shapesVM:MainViewModel, IsDesignTimeCreatable=False}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>

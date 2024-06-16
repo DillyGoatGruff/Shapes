@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shapes
+namespace Shapes.Mvvm.Models.Shapes
 {
     public interface IShape
     {
-       
+
         ShapeType Type { get; set; }
 
         string Name { get; set; }

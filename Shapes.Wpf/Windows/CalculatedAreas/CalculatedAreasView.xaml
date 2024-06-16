@@ -37,7 +37,7 @@
                         <TextBlock Margin="5,0,0,0" Text="Total:" TextAlignment="Right"/>
                     </Grid>
                     <Grid Width="{Binding ElementName=txtclmnArea,Path=ActualWidth}">
-                        <TextBlock Text="{Binding TotalArea, StringFormat=N1}" Margin="5,0,0,0" TextAlignment="Right"/>
+                        <TextBlock Text="{Binding TotalArea, StringFormat=N1}" Margin="5,0,0,0" TextAlignment="Center"/>
                     </Grid>
                 </StackPanel>
             </StackPanel>

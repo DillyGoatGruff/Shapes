@@ -4,27 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shapes.Models
+namespace Shapes.Mvvm.Models.Shapes
 {
-    public class Circle : IShape
+    public class Square : IShape
     {
 
         public ShapeType Type { get; set; }
         public string Name { get; set; }
 
-        public ShapeDimension Radius { get; set; }
-
         public ShapeDimension[] Dimensions { get; }
 
-        public double Area => Math.PI * Math.Pow(Radius, 2);
+        public ShapeDimension Side { get; set; }
 
-        public Circle(ShapeType type, string name, double radius)
+        public double Area => Math.Pow(Side, 2);
+
+        public Square(ShapeType type, string name, double side)
         {
             Type = type;
             Name = name;
-            Radius = new ShapeDimension("Radius", radius);
+            Side = new ShapeDimension("Side", side);
 
-            Dimensions = [Radius];
+            Dimensions = [Side];
         }
 
     }
