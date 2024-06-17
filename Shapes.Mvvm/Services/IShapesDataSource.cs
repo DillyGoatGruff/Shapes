@@ -14,7 +14,26 @@ namespace Shapes.Mvvm.Services
 
         ShapeType[] GetShapeTypes();
 
+        /// <summary>
+        /// Saves new shape. Updates <see cref="IShape.ID"/> upon save.
+        /// </summary>
+        /// <param name="shape">The shape to add.</param>
+        /// <returns><see langword="true"/> if sucessfully saved.</returns>
         bool AddNewShape(IShape shape);
+
+        /// <summary>
+        /// Saves new edited shape.
+        /// </summary>
+        /// <param name="shape">The shape to update.</param>
+        /// <returns><see langword="true"/> if sucessfully saved.</returns>
+        bool UpdateShape(IShape shape);
+
+        /// <summary>
+        /// Deletes shape.
+        /// </summary>
+        /// <param name="shape">The shape to delete.</param>
+        /// <returns><see langword="true"/> if sucessfully deleted.</returns>
+        bool DeleteShape(IShape shape);
 
     }
 }

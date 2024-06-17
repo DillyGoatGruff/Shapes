@@ -121,6 +121,12 @@
   <data name="AddShape" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddShape.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="DeleteShape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DeleteShape.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EditShape" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditShape.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="MeasureImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MeasureImage.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

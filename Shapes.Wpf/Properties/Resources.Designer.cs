@@ -73,6 +73,26 @@ namespace Shapes.Wpf.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] DeleteShape {
+            get {
+                object obj = ResourceManager.GetObject("DeleteShape", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] EditShape {
+            get {
+                object obj = ResourceManager.GetObject("EditShape", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] MeasureImage {
             get {
                 object obj = ResourceManager.GetObject("MeasureImage", resourceCulture);

@@ -10,16 +10,18 @@ namespace Shapes.Mvvm.ViewModels
     {
         private readonly IShapesDataSource _shapesDataSource;
         private readonly ICalculatedAreaPresenter _calculateAreaPresenter;
-        private readonly IAddShapePresenter _addShapePresenter;
+        private readonly IAddEditShapePresenter _addShapePresenter;
 
         public ObservableCollection<IShape> Shapes { get; } = new ObservableCollection<IShape>();
 
         public ICommand CalculateAreaCommand { get; }
         public ICommand AddShapeCommand { get; }
+        public ICommand EditShapeCommand { get; }
+        public ICommand DeleteShapeCommand { get; }
 
         public MainViewModel(IShapesDataSource shapesDataSource,
                 ICalculatedAreaPresenter calculateAreaPresenter,
-                IAddShapePresenter addShapePresenter)
+                IAddEditShapePresenter addShapePresenter)
         {
             _shapesDataSource = shapesDataSource;
             _calculateAreaPresenter = calculateAreaPresenter;
@@ -28,6 +30,8 @@ namespace Shapes.Mvvm.ViewModels
 
             CalculateAreaCommand = new RelayCommand(CalculateArea);
             AddShapeCommand = new RelayCommand(AddShape);
+            EditShapeCommand = new RelayCommand<IShape>(param => EditShape(param!));
+            DeleteShapeCommand = new RelayCommand<IShape>(param => DeleteShape(param!));
         }
 
 
@@ -38,7 +42,7 @@ namespace Shapes.Mvvm.ViewModels
 
         private void AddShape()
         {
-            IShape? newShape = _addShapePresenter.Present();
+            IShape? newShape = _addShapePresenter.PresentShapeCreation();
             if (newShape == null)
             {
                 return;
@@ -54,5 +58,36 @@ namespace Shapes.Mvvm.ViewModels
             }
         }
 
+        private void EditShape(IShape shape)
+        {
+            IShape? edittedShape = _addShapePresenter.PresentShapeEdit(shape.Clone());
+            if (edittedShape == null)
+            {
+                return;
+            }
+
+            if (_shapesDataSource.UpdateShape(edittedShape))
+            {
+                int index = Shapes.IndexOf(shape);
+                Shapes[index] = edittedShape;
+            }
+            else
+            {
+                ///TODO: Notify user that the shape was not successfully updated.
+            }
+        }
+
+        private void DeleteShape(IShape shape)
+        {
+            if (_shapesDataSource.DeleteShape(shape))
+            {
+                int index = Shapes.IndexOf(shape);
+                Shapes.Remove(shape);
+            }
+            else
+            {
+                ///TODO: Notify user that the shape was not successfully deleted.
+            }
+        }
     }
 }

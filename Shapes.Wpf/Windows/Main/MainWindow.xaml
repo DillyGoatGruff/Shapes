@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Shapes.Wpf.Windows.Main"
         xmlns:shapesVM="clr-namespace:Shapes.Mvvm.ViewModels;assembly=Shapes.MVVM"
+        xmlns:wktc="clr-namespace:WpfToolkit.Converters;assembly=WpfToolKit"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d" d:DataContext="{d:DesignInstance shapesVM:MainViewModel, IsDesignTimeCreatable=False}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Shape Manager" Height="450" Width="800">
+    <Window.Resources>
+        <wktc:IsEqualToParameterConverter x:Key="isEqualToParameterConverter">
+            <wktc:IsEqualToParameterConverter.EqualsValue>
+                <sys:Boolean>false</sys:Boolean>
+            </wktc:IsEqualToParameterConverter.EqualsValue>
+            <wktc:IsEqualToParameterConverter.NotEqualsValue>
+                <sys:Boolean>true</sys:Boolean>
+            </wktc:IsEqualToParameterConverter.NotEqualsValue>
+        </wktc:IsEqualToParameterConverter>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -19,21 +31,46 @@
                 <StackPanel VerticalAlignment="Bottom">
                     <Image Source="/Resources/MeasureImage.png"  Height="50"/>
                     <TextBlock Text="Calculate Area" TextAlignment="Center"/>
-                    <!--<TextBlock Text="Area" TextAlignment="Center"/>-->
                 </StackPanel>
             </Button>
-            <Button Margin="2" BorderThickness="1" BorderBrush="White"
+            
+            <!--Add uniform grid so Add, Edit, and Delete buttons are all the same width-->
+            <UniformGrid Rows="1">
+                <Button Margin="2" BorderThickness="1" BorderBrush="White"
                     Command="{Binding AddShapeCommand}">
-                <StackPanel VerticalAlignment="Bottom">
-                    <Image Source="/Resources/AddShape.png"  Height="50"/>
-                    <TextBlock Text="Add Shape" TextAlignment="Center"/>
-                    <!--<TextBlock Text="Area" TextAlignment="Center"/>-->
-                </StackPanel>
-            </Button>
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Image Source="/Resources/AddShape.png"  Height="50"/>
+                        <TextBlock Text="Add Shape" TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Margin="2" BorderThickness="1" BorderBrush="White"
+                    Command="{Binding EditShapeCommand}"
+                    CommandParameter="{Binding SelectedValue, ElementName=lstViewShapes}"
+                    IsEnabled="{Binding SelectedValue, ElementName=lstViewShapes, 
+                            Converter={StaticResource isEqualToParameterConverter}, 
+                            ConverterParameter={x:Null}}">
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Image Source="/Resources/EditShape.png"  Height="50"/>
+                        <TextBlock Text="Edit Shape" TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Margin="2" BorderThickness="1" BorderBrush="White"
+                    Command="{Binding DeleteShapeCommand}"
+                    CommandParameter="{Binding SelectedValue, ElementName=lstViewShapes}"
+                    IsEnabled="{Binding SelectedValue, ElementName=lstViewShapes, 
+                            Converter={StaticResource isEqualToParameterConverter}, 
+                            ConverterParameter={x:Null}}">
+                    <StackPanel VerticalAlignment="Bottom">
+                        <Image Source="/Resources/DeleteShape.png"  Height="50"/>
+                        <TextBlock Text="Delete Shape" TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </UniformGrid>
+            
             <Border DockPanel.Dock="Right"/>
         </DockPanel>
 
-        <ListView Grid.Row="1" HorizontalAlignment="left" VerticalAlignment="Top" Width="450"
+        <ListView x:Name="lstViewShapes" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                 ItemsSource="{Binding Shapes}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
@@ -42,14 +79,20 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel/>
+                    <WrapPanel Grid.IsSharedSizeScope="true" VerticalAlignment="Top" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="5" BorderThickness="1" BorderBrush="Black" >
-                        <local:ShapeView />
-                    </Border>
+                    <!--Put each item in a grid with a shared size so all controls are equal width.-->
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="clmngrpShape" Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Padding="5" BorderThickness="1" BorderBrush="Black" >
+                            <local:ShapeView />
+                        </Border>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

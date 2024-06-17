@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Shapes.Wpf.Windows.AddShape.AddShapeView"
+﻿<UserControl x:Class="Shapes.Wpf.Windows.AddEditShape.AddEditShapeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
              xmlns:shapesVMs="clr-namespace:Shapes.Mvvm.ViewModels;assembly=Shapes.Mvvm"
              xmlns:shapesModels="clr-namespace:Shapes.Mvvm.Models;assembly=Shapes.Mvvm"
              xmlns:wkta="clr-namespace:WpfToolKit.AttachedProperties;assembly=WpfToolKit"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance shapesVMs:AddShapeViewModel, IsDesignTimeCreatable=False}"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance shapesVMs:AddEditShapeViewModel, IsDesignTimeCreatable=False}"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <appTools:DimensionsToPathMultiConverter x:Key="dimensionsToPathMultiConverter"/>
@@ -71,7 +71,8 @@
                 <TextBlock Text="Name:" TextAlignment="Right"/>
                 <TextBox Grid.Column="1" Margin="5,0,0,0" Text="{Binding ShapeName, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
-            <ItemsControl Margin="0,0,0,0" ItemsSource="{Binding Dimensions}">
+            <ItemsControl Margin="0,0,0,0" KeyboardNavigation.IsTabStop="False"
+                        ItemsSource="{Binding Dimensions}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type shapesVMs:DimensionViewModel}">
                         <Grid>
@@ -81,7 +82,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Margin="0,1" Text="{Binding Name, StringFormat='{}  {0}:'}" TextAlignment="Right"/>
                             <TextBox Grid.Column="1" Margin="5,1,0,1" MinWidth="100" TextAlignment="Center"
-                                    Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, StringFormat='#.##########'}" />
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

@@ -14,7 +14,7 @@
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal">
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="{Binding Type.Name}" TextAlignment="Center"/>
+            <TextBlock Margin="0,0,0,2" Text="{Binding Type.Name}" TextAlignment="Center"/>
             <Viewbox Height="50" Width="50" HorizontalAlignment="Left">
                 <Path Stroke="Black" HorizontalAlignment="Center"
                         StrokeThickness="{Binding StrokeThickness, Source={StaticResource shapeToPathDataConverter}}" 

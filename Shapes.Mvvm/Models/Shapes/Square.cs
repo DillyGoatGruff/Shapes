@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shapes.Mvvm.Models.Shapes
+﻿namespace Shapes.Mvvm.Models.Shapes
 {
     public class Square : IShape
     {
+        public int Id { get; private set; }
 
         public ShapeType Type { get; set; }
+
         public string Name { get; set; }
 
         public ShapeDimension[] Dimensions { get; }
@@ -18,8 +14,9 @@ namespace Shapes.Mvvm.Models.Shapes
 
         public double Area => Math.Pow(Side, 2);
 
-        public Square(ShapeType type, string name, double side)
+        public Square(int id, ShapeType type, string name, double side)
         {
+            Id = id;
             Type = type;
             Name = name;
             Side = new ShapeDimension("Side", side);
@@ -27,5 +24,14 @@ namespace Shapes.Mvvm.Models.Shapes
             Dimensions = [Side];
         }
 
+        public IShape Clone()
+        {
+            return new Square(Id, Type, Name, Side);
+        }
+
+        public void UpdateIdAfterSave(int id)
+        {
+            Id = id;
+        }
     }
 }

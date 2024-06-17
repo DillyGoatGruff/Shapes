@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shapes.Mvvm.Models.Shapes
+﻿namespace Shapes.Mvvm.Models.Shapes
 {
     public class Circle : IShape
     {
+        public int Id { get; private set; }
 
         public ShapeType Type { get; set; }
+
         public string Name { get; set; }
 
         public ShapeDimension Radius { get; set; }
@@ -18,8 +14,9 @@ namespace Shapes.Mvvm.Models.Shapes
 
         public double Area => Math.PI * Math.Pow(Radius, 2);
 
-        public Circle(ShapeType type, string name, double radius)
+        public Circle(int id, ShapeType type, string name, double radius)
         {
+            Id = id;
             Type = type;
             Name = name;
             Radius = new ShapeDimension("Radius", radius);
@@ -27,5 +24,14 @@ namespace Shapes.Mvvm.Models.Shapes
             Dimensions = [Radius];
         }
 
+        public IShape Clone()
+        {
+            return new Circle(Id, Type, Name, Radius);
+        }
+
+        public void UpdateIdAfterSave(int id)
+        {
+            Id = id;
+        }
     }
 }

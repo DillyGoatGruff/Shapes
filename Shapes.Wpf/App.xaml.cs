@@ -2,7 +2,7 @@
 using Shapes.DataAccess;
 using Shapes.Mvvm.Services;
 using Shapes.Mvvm.ViewModels;
-using Shapes.Wpf.Windows.AddShape;
+using Shapes.Wpf.Windows.AddEditShape;
 using Shapes.Wpf.Windows.CalculatedAreas;
 using Shapes.Wpf.Windows.Main;
 using System.Windows;
@@ -21,11 +21,11 @@ namespace Shapes.Wpf
         public App()
         {
             ServiceProvider = new ServiceCollection()
-                .AddTransient<IAddShapePresenter, AddShapePresenter>()
+                .AddTransient<IAddEditShapePresenter, AddEditShapePresenter>()
                 .AddTransient<ICalculatedAreaPresenter, CalculatedAreaPresenter>()
-                .AddSingleton<IShapesDataSource, ShapesManager>()
+                .AddSingleton<IShapesDataSource, SqliteShapesDataSource>()
                 .AddSingleton<MainViewModel>()
-                .AddTransient<AddShapeViewModel>()
+                .AddTransient<AddEditShapeViewModel>()
                 .AddTransient<CalculatedAreasViewModel>()
                 .AddSingleton<MainWindow>(x =>
                 {

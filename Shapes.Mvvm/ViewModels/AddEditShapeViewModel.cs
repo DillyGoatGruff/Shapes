@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Shapes.Mvvm.ViewModels
 {
-    public class AddShapeViewModel : ViewModelBase
+    public class AddEditShapeViewModel : ViewModelBase
     {
         private ShapeType? _selectedShapeType;
         private IShape? _newShape;
@@ -36,7 +36,7 @@ namespace Shapes.Mvvm.ViewModels
         public IShape? NewShape
         {
             get => _newShape;
-            set
+            private set
             {
                 if (_newShape != value)
                 {
@@ -100,7 +100,7 @@ namespace Shapes.Mvvm.ViewModels
             }
         }
 
-        public AddShapeViewModel(IShapesDataSource shapesDataSource)
+        public AddEditShapeViewModel(IShapesDataSource shapesDataSource)
         {
             ShapeTypes = shapesDataSource.GetShapeTypes();
             Dimensions = Array.Empty<DimensionViewModel>();
@@ -117,5 +117,12 @@ namespace Shapes.Mvvm.ViewModels
             return true;
         }
 
+        public void SetShapeToEdit(IShape shape)
+        {
+            _selectedShapeType = ShapeTypes.FirstOrDefault(x => x.Id == shape.Type.Id);
+            NewShape = shape;
+            OnPropertyChanged(nameof(SelectedShapeType));
+            OnPropertyChanged(nameof(NewShape));
+        }
     }
 }

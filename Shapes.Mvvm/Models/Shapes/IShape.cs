@@ -8,6 +8,7 @@ namespace Shapes.Mvvm.Models.Shapes
 {
     public interface IShape
     {
+        public int Id { get; }
 
         ShapeType Type { get; set; }
 
@@ -17,12 +18,20 @@ namespace Shapes.Mvvm.Models.Shapes
 
         ShapeDimension[] Dimensions { get; }
 
+        /// <summary>
+        /// Creates a new shape with all the same values as the current shape.
+        /// </summary>
+        /// <returns>The new shape.</returns>
+        IShape Clone();
+
+        void UpdateIdAfterSave(int id);
+
         public static IShape CreateShape(ShapeType type) => type.Name switch
         {
-            nameof(Circle) => new Circle(type, nameof(Circle), 0),
-            nameof(Square) => new Square(type, nameof(Square), 0),
-            nameof(Rectangle) => new Rectangle(type, nameof(Rectangle), 0, 0),
-            nameof(Triangle) => new Triangle(type, nameof(Triangle), 0, 0, 0),
+            nameof(Circle) => new Circle(-1, type, nameof(Circle), 0),
+            nameof(Square) => new Square(-1, type, nameof(Square), 0),
+            nameof(Rectangle) => new Rectangle(-1, type, nameof(Rectangle), 0, 0),
+            nameof(Triangle) => new Triangle(-1, type, nameof(Triangle), 0, 0, 0),
             _ => throw new NotImplementedException($"Unknown shape type: '{type.Name}'")
         };
 

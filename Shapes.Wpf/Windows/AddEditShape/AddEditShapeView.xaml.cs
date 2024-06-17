@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Shapes.Wpf.Windows.AddShape
+namespace Shapes.Wpf.Windows.AddEditShape
 {
     /// <summary>
     /// Interaction logic for ShapeView.xaml
     /// </summary>
-    public partial class AddShapeView : UserControl
+    public partial class AddEditShapeView : UserControl
     {
-        public AddShapeView()
+        public AddEditShapeView()
         {
             InitializeComponent();
         }
